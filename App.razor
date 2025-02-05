@@ -1,0 +1,15 @@
+@using Microsoft.AspNetCore.Components.Routing
+
+<CascadingValue Value="@navigationManager">
+    <Router AppAssembly="@typeof(App).Assembly">
+        <RouteView RouteData="@routeData" DefaultLayout="typeof(MainLayout)" />
+        <RouteDataTemplate Context="routeData">
+            @routeData.PageType.Name
+        </RouteDataTemplate>
+    </Router>
+</CascadingValue>
+
+@code {
+    [Inject]
+    private NavigationManager navigationManager { get; set; }
+}
