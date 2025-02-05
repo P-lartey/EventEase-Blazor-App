@@ -1,0 +1,42 @@
+@page "/attendance"
+
+<h3>Attendance Tracker</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var attendee in attendees)
+        {
+            <tr>
+                <td>@attendee.Name</td>
+                <td>@attendee.Status</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<button class="btn btn-primary" @onclick="AddAttendee">Add Attendee</button>
+
+@code {
+    private List<Attendee> attendees = new List<Attendee>
+    {
+        new Attendee { Name = "John Doe", Status = "Attending" },
+        new Attendee { Name = "Jane Smith", Status = "Not Attending" }
+    };
+
+    private void AddAttendee()
+    {
+        attendees.Add(new Attendee { Name = "New Attendee", Status = "Attending" });
+    }
+
+    public class Attendee
+    {
+        public string Name { get; set; }
+        public string Status { get; set; }
+    }
+}
