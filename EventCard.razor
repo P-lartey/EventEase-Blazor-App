@@ -1,0 +1,48 @@
+@page "/eventcard"
+@using System.ComponentModel.DataAnnotations
+
+<h3>Event Card</h3>
+
+<EditForm Model="@eventDetails" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for="eventName">Event Name</label>
+        <InputText id="eventName" class="form-control" @bind-Value="eventDetails.EventName" />
+    </div>
+
+    <div class="form-group">
+        <label for="eventDate">Event Date</label>
+        <InputDate id="eventDate" class="form-control" @bind-Value="eventDetails.EventDate" />
+    </div>
+
+    <div class="form-group">
+        <label for="eventLocation">Event Location</label>
+        <InputText id="eventLocation" class="form-control" @bind-Value="eventDetails.EventLocation" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Event</button>
+</EditForm>
+
+@code {
+    private EventDetails eventDetails = new EventDetails();
+
+    private void HandleValidSubmit()
+    {
+        // Handle event save logic here
+        Console.WriteLine($"Event {eventDetails.EventName} saved successfully!");
+    }
+
+    public class EventDetails
+    {
+        [Required]
+        public string EventName { get; set; }
+
+        [Required]
+        public DateTime EventDate { get; set; }
+
+        [Required]
+        public string EventLocation { get; set; }
+    }
+}
